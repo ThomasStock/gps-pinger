@@ -1,0 +1,43 @@
+name: GPSPinger
+options:
+  bundleIdPrefix: com.thomas
+configs:
+  Debug: debug
+  Release: release
+settings:
+  base:
+    SWIFT_VERSION: 5.10
+    CURRENT_PROJECT_VERSION: 1
+    MARKETING_VERSION: 1.0
+    GENERATE_INFOPLIST_FILE: NO
+targets:
+  GPSPinger:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - ios/GPSPinger/App
+      - ios/GPSPinger/Models
+      - ios/GPSPinger/Services
+      - ios/GPSPinger/Tracking
+      - ios/GPSPinger/Networking
+    info:
+      path: ios/GPSPinger/Config/Info.plist
+      properties:
+        LSRequiresIPhoneOS: true
+        NSLocationAlwaysAndWhenInUseUsageDescription: "We use your location in the background to send GPS updates."
+        NSLocationWhenInUseUsageDescription: "We use your location to send GPS updates while the app is active."
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+        UIBackgroundModes:
+          - location
+        UILaunchScreen: {}
+        UIApplicationSupportsIndirectInputEvents: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.thomas.gpspinger
+        PRODUCT_NAME: GPSPinger
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_FILE: ios/GPSPinger/Config/Info.plist
+    scheme:
+      gatherCoverageData: false
