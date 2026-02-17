@@ -13,6 +13,7 @@
 		531AE80B05E29438B784EB29 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AAD03E0BAC50596F0BB731 /* AppTheme.swift */; };
 		55478857EC16BAEEF9CBD3EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F145BA33EFC7AEE3232CA0 /* ContentView.swift */; };
 		63131E9CA2C0DA17BF287B58 /* LocationUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E6BB24833623BA3DE96BB /* LocationUploader.swift */; };
+		8826356416CF9166E42114A7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AA0B409A25C52B3DF5E2C7 /* SettingsView.swift */; };
 		ADF686A533CEDEA372ECCD2C /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD42CD89CFC8D56EE7680 /* LogView.swift */; };
 		C5BB14722A471595D13072FC /* TrackerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D329CDEB6656AD9EF45E4A44 /* TrackerSettings.swift */; };
 		E5160CAEBDB1AAA23530477B /* GPSPingerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EA4EA1FF001A87B4D15D2 /* GPSPingerApp.swift */; };
@@ -31,6 +32,7 @@
 		D329CDEB6656AD9EF45E4A44 /* TrackerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerSettings.swift; sourceTree = "<group>"; };
 		E15E6BB24833623BA3DE96BB /* LocationUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUploader.swift; sourceTree = "<group>"; };
 		F6F145BA33EFC7AEE3232CA0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F8AA0B409A25C52B3DF5E2C7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F93ACB4EF5EC4845B6652887 /* LocationTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
 		FC6EA4EA1FF001A87B4D15D2 /* GPSPingerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSPingerApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,6 +73,7 @@
 				F6F145BA33EFC7AEE3232CA0 /* ContentView.swift */,
 				FC6EA4EA1FF001A87B4D15D2 /* GPSPingerApp.swift */,
 				463AD42CD89CFC8D56EE7680 /* LogView.swift */,
+				F8AA0B409A25C52B3DF5E2C7 /* SettingsView.swift */,
 				B3A9A28E5CA433AC5072D74A /* TrackerView.swift */,
 			);
 			name = App;
@@ -169,6 +172,7 @@
 				63131E9CA2C0DA17BF287B58 /* LocationUploader.swift in Sources */,
 				ADF686A533CEDEA372ECCD2C /* LogView.swift in Sources */,
 				10DF540FD8CBFF9D71BABFAC /* SettingsStore.swift in Sources */,
+				8826356416CF9166E42114A7 /* SettingsView.swift in Sources */,
 				C5BB14722A471595D13072FC /* TrackerSettings.swift in Sources */,
 				E51ED3C4E2BE13E5270FB088 /* TrackerView.swift in Sources */,
 			);

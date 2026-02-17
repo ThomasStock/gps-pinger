@@ -16,10 +16,12 @@ final class LocationTracker: NSObject, ObservableObject {
     private let manager: CLLocationManager
     private let settingsStore: SettingsStore
     private let logStore: AppLogStore
+    private let defaults: UserDefaults
     private let policy = AdaptivePingPolicy()
     private let uploader = LocationUploader()
     private let homeRegionIdentifier = "gps_pinger.home"
     private let homeRadiusMeters: CLLocationDistance = 100
+    private let trackingStateKey = "gps_pinger.isTracking.v1"
     private let deviceId: String
     private let supportsBackgroundLocationUpdates: Bool
 
@@ -35,11 +37,13 @@ final class LocationTracker: NSObject, ObservableObject {
     init(
         settingsStore: SettingsStore,
         logStore: AppLogStore,
-        manager: CLLocationManager = CLLocationManager()
+        manager: CLLocationManager = CLLocationManager(),
+        defaults: UserDefaults = .standard
     ) {
         self.settingsStore = settingsStore
         self.logStore = logStore
         self.manager = manager
+        self.defaults = defaults
         authorizationStatus = manager.authorizationStatus
 
         #if canImport(UIKit)
@@ -72,6 +76,13 @@ final class LocationTracker: NSObject, ObservableObject {
                 self.logStore.add("Settings updated.")
             }
             .store(in: &cancellables)
+
+        isTracking = defaults.bool(forKey: trackingStateKey)
+        if isTracking {
+            logStore.add("Restored tracking state from previous session.")
+            manager.requestAlwaysAuthorization()
+            evaluateAuthorizationAndStartIfAllowed()
+        }
     }
 
     func startTracking() {
@@ -80,6 +91,7 @@ final class LocationTracker: NSObject, ObservableObject {
         }
 
         isTracking = true
+        persistTrackingState()
         logStore.add("Start requested.")
         manager.requestAlwaysAuthorization()
         evaluateAuthorizationAndStartIfAllowed()
@@ -91,6 +103,7 @@ final class LocationTracker: NSObject, ObservableObject {
         }
 
         isTracking = false
+        persistTrackingState()
         continuousUpdatesEnabled = false
         manager.stopUpdatingLocation()
         manager.stopMonitoringSignificantLocationChanges()
@@ -118,6 +131,13 @@ final class LocationTracker: NSObject, ObservableObject {
         }
 
         manager.requestLocation()
+    }
+
+    func setHome(to coordinate: CLLocationCoordinate2D, source: String = "map center") {
+        pendingSetHomeFromNextLocation = false
+        lastError = nil
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        applyHome(location, source: source)
     }
 
     private func evaluateAuthorizationAndStartIfAllowed() {
@@ -316,6 +336,10 @@ final class LocationTracker: NSObject, ObservableObject {
         logStore.add(
             "Home set to \(source) location (\(formatCoordinate(location.coordinate.latitude)), \(formatCoordinate(location.coordinate.longitude)))."
         )
+    }
+
+    private func persistTrackingState() {
+        defaults.set(isTracking, forKey: trackingStateKey)
     }
 
     private func formatCoordinate(_ value: Double) -> String {

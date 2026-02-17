@@ -7,9 +7,14 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            TrackerView(settingsStore: settingsStore, tracker: tracker)
+            TrackerView(tracker: tracker)
                 .tabItem {
                     Label("Tracker", systemImage: "location.fill")
+                }
+
+            SettingsView(settingsStore: settingsStore, tracker: tracker)
+                .tabItem {
+                    Label("Settings", systemImage: "slider.horizontal.3")
                 }
 
             LogView(logStore: logStore)
@@ -19,5 +24,7 @@ struct ContentView: View {
         }
         .fontDesign(.rounded)
         .tint(AppTheme.primary)
+        .toolbarBackground(AppTheme.tabBarBackground, for: .tabBar)
+        .toolbarBackground(.visible, for: .tabBar)
     }
 }
